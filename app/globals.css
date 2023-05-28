@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -24,4 +25,16 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+}
+*/
+
+@layer base {
+  html,
+  body,
+  body > div:first-child,
+  div#__next,
+  div#__next > div {
+    height: 100%;
+    background-image: linear-gradient(#112754, #111153, #0a093e, #020024);
+  }
 }
