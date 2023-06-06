@@ -35,7 +35,6 @@ export default async function ToolBar(props: { summoner: SummonerInterface }) {
                 <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                   <span className="sr-only">Open main menu</span>
                   {open ? (
-                    // <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -52,7 +51,6 @@ export default async function ToolBar(props: { summoner: SummonerInterface }) {
                       />
                     </svg>
                   ) : (
-                    // <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -108,18 +106,13 @@ export default async function ToolBar(props: { summoner: SummonerInterface }) {
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <button
-                  type="button"
-                  className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                >
-                  <span className="sr-only">View notifications</span>
-                  {/* <BellIcon className="h-6 w-6" aria-hidden="true" /> */}
-                </button>
-
+                <span className="hover:text-white text-gray-400">
+                  {props.summoner.name}
+                </span>
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
                   <div>
-                    <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                    <Menu.Button className="flex rounded-full bg-gray-800 text-sm">
                       <div>
                         <img
                           className="h-11 w-11 rounded-full relative top-2"

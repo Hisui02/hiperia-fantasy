@@ -12,12 +12,11 @@ export const metadata = {
 
 const getSummonerData = async (sum: string): Promise<SummonerInterface> => {
   const res = await fetch(
-    `https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${sum}?api_key=${process.env.LOL_API_KEY}`
+    `https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${sum}?api_key=${process.env.LOL_API_KEY}`,
+    { cache: "force-cache" }
   );
 
   if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-
     throw new Error("Failed to fetch data");
   }
 

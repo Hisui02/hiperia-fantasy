@@ -8,17 +8,21 @@ type props = {
 };
 
 const Schedule = (props: props) => {
-  let eventsArray = props.schedule.data.schedule.events;
-  eventsArray = eventsArray.reverse();
-  const events = eventsArray
-    .filter((e) => {
-      return e.state !== "unstarted";
-    })
-    .slice(0, 5);
+  const eventsArray = props.schedule.data.schedule.events.reverse();
+  const firstMatchIndex = eventsArray.findIndex((e) => {
+    return new Date(e.startTime).getTime() < new Date().getTime();
+  });
+  const events = [
+    eventsArray[firstMatchIndex - 1],
+    eventsArray[firstMatchIndex],
+    eventsArray[firstMatchIndex + 1],
+    eventsArray[firstMatchIndex + 2],
+    eventsArray[firstMatchIndex + 3],
+  ];
   return (
     <table className="table w-full bg-black rounded-xl">
       <tbody>
-        {events.slice(0, 5).map((e) => {
+        {events.map((e) => {
           const timeFormat: Intl.DateTimeFormatOptions = {
             month: undefined,
             day: undefined,
