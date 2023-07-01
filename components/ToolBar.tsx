@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { SummonerInterface } from "@/Interfaces/Summoner";
+import { signOut } from "next-auth/react";
 
 import HiperiaLogo from "../public/hiperia_logo.svg";
 
@@ -151,15 +152,17 @@ export default async function ToolBar(props: { summoner: SummonerInterface }) {
 
                       <Menu.Item>
                         {({ active }) => (
-                          <Link
-                            href="/login"
+                          <p
+                            onClick={() => {
+                              signOut({ callbackUrl: "/" });
+                            }}
                             className={classNames(
                               active ? "bg-gray-100" : "",
                               "block px-4 py-2 text-sm text-gray-700"
                             )}
                           >
                             Cerrar Sesión
-                          </Link>
+                          </p>
                         )}
                       </Menu.Item>
                     </Menu.Items>
