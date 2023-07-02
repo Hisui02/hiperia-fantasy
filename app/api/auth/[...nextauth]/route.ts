@@ -24,19 +24,10 @@ export const authOptions: NextAuthOptions = {
       async authorize(credentials, req) {
         // Add logic here to look up the user from the credentials supplied
         await connectDB();
-        console.log(credentials);
-
-        //const userFound = { username: "Hisui02", password: "test" };
-
-        // const userFound = await User.findOne({
-        //   username: credentials?.username,
-        // });
 
         const userFound = await User.findOne({
           username: credentials?.username,
         }).select("+password");
-
-        console.log(userFound);
 
         if (!userFound) throw new Error("Invalid credentials");
 
@@ -68,6 +59,9 @@ export const authOptions: NextAuthOptions = {
       //session.user = token.user as any;
       return session;
     },
+  },
+  pages: {
+    signIn: "/login",
   },
 };
 
