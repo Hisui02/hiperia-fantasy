@@ -11,7 +11,7 @@ export default function Login() {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const onSubmit = async (event: Event) => {
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsLoading(true);
     const result = await signIn("credentials", {
