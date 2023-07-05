@@ -5,7 +5,15 @@ import Background from "../../public/loginBackground.png";
 import { signIn } from "next-auth/react";
 import { useRef, useState } from "react";
 
-export default function Login() {
+type Props = {
+  params: {};
+  searchParams: {
+    callbackUrl?: string;
+    error?: string;
+  };
+};
+
+export default function Login(props: Props) {
   const user = useRef("");
   const password = useRef("");
 
@@ -36,6 +44,11 @@ export default function Login() {
           <div className="mb-8 flex flex-col items-center">
             <img src={HiperiaLogo.src} width="150" alt="" />
             <h1 className="mt-2 text-2xl">Fantasy</h1>
+            {props.searchParams.error && (
+              <span className="mt-2 text-md font-bold text-red-700">
+                Usuario o contraseña no válidos
+              </span>
+            )}
           </div>
           <form onSubmit={onSubmit}>
             <div className="mb-4 text-lg">
