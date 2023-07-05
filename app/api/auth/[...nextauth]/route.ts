@@ -48,6 +48,9 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
+  session: {
+    maxAge: 60 * 60,
+  },
   callbacks: {
     jwt({ token, user }) {
       if (user) token.user = user;
@@ -56,12 +59,12 @@ export const authOptions: NextAuthOptions = {
     session({ session, token }) {
       const { password, ...tokenWithoutPassword } = token.user;
       session.user = tokenWithoutPassword;
-      //session.user = token.user as any;
       return session;
     },
   },
   pages: {
     signIn: "/login",
+    error: "/login",
   },
 };
 
