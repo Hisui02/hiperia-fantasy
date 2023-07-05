@@ -33,11 +33,7 @@ const getSchedule = async (): Promise<ScheduleInterface> => {
   }
 };
 
-type props = {
-  schedule: ScheduleInterface;
-};
-
-export default async function Home(props: props) {
+export default async function Home() {
   const schedule = await getSchedule();
 
   return (
