@@ -1,5 +1,6 @@
 import Schedule from "@/components/home/Schedule";
 import { ScheduleInterface } from "@/Interfaces";
+import Link from "next/link";
 
 const getSchedule = async (): Promise<ScheduleInterface> => {
   const response = await fetch(
@@ -43,7 +44,9 @@ export default async function Home() {
       </div>
       <div className="col-span-2 grid grid-rows-2 gap-4 ">
         <div className="bg-gray-200 rounded-xl">
-          <p>a</p>
+          <Link href={`/match/1234`} as={`/match/1234`}>
+            test
+          </Link>
         </div>
         <div className="bg-gray-200 rounded-xl">
           <p>a</p>

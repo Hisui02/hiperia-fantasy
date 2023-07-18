@@ -2,12 +2,15 @@
 
 import { ScheduleInterface } from "@/Interfaces";
 import { Fragment } from "react";
+import { useRouter } from "next/navigation";
 
 type props = {
   schedule: ScheduleInterface;
 };
 
 const Schedule = (props: props) => {
+  const router = useRouter();
+
   const eventsArray = props.schedule.data.schedule.events.reverse();
   const firstMatchIndex = eventsArray.findIndex((e) => {
     return new Date(e.startTime).getTime() < new Date().getTime();
@@ -50,7 +53,12 @@ const Schedule = (props: props) => {
                 </td>
               </tr>
 
-              <tr className="text-center bg-blue-950">
+              <tr
+                className="text-center bg-blue-950"
+                onClick={() => {
+                  router.push(`/match/${e.match.id}`);
+                }}
+              >
                 <td className="text-white w-1/4">{e.match.teams[0].name}</td>
                 <td className="w-1/5 text-center">
                   <img
