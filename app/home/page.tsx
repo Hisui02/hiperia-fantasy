@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const getSchedule = async (): Promise<ScheduleInterface> => {
   const response = await fetch(
-    `https://esports-api.lolesports.com/persisted/gw/getSchedule?hl=es-ES&leagueId=105266074488398661`,
+    `https://esports-api.lolesports.com/persisted/gw/getSchedule?hl=es-ES&leagueId=98767991302996019`,
     {
       headers: {
         accept: "*/*",
@@ -24,7 +24,7 @@ const getSchedule = async (): Promise<ScheduleInterface> => {
       method: "GET",
       mode: "cors",
       credentials: "omit",
-      next: { revalidate: 600 },
+      next: { revalidate: 0 },
     }
   );
   if (!response.ok) {
@@ -35,7 +35,13 @@ const getSchedule = async (): Promise<ScheduleInterface> => {
 };
 
 export default async function Home() {
-  const schedule = await getSchedule();
+  const scheduleData = getSchedule();
+
+  const [schedule] = await Promise.all([scheduleData]);
+
+  console.log(schedule);
+
+  //const schedule = await getSchedule();
 
   return (
     <div className="grid lg:grid-cols-3 grid-cols-1 gap-4 m-5">

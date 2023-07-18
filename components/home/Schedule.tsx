@@ -22,6 +22,9 @@ const Schedule = (props: props) => {
     eventsArray[firstMatchIndex + 2],
     eventsArray[firstMatchIndex + 3],
   ];
+
+  console.log(events);
+
   return (
     <table className="table w-full bg-black rounded-xl">
       <tbody>
@@ -36,10 +39,10 @@ const Schedule = (props: props) => {
             timeZone: undefined,
           };
           return (
-            <Fragment key={e.startTime}>
+            <Fragment key={e?.startTime}>
               <tr className="text-center bg-black text-white">
                 <td colSpan={5} className="font-bold text-lg">
-                  {new Date(e.startTime)
+                  {new Date(e?.startTime)
                     .toLocaleString("es-ES", {
                       weekday: "long",
                     })
@@ -49,21 +52,24 @@ const Schedule = (props: props) => {
 
               <tr className="text-center bg-black text-white">
                 <td colSpan={5} className="font-bold text-lg">
-                  {new Date(e.startTime).toLocaleString("es-ES", timeFormat)}
+                  {new Date(e?.startTime).toLocaleString("es-ES", timeFormat)}
                 </td>
               </tr>
 
               <tr
-                className="text-center bg-blue-950"
+                className={`text-center bg-blue-950 ${
+                  e.state !== "unstarted" && "cursor-pointer"
+                }`}
                 onClick={() => {
-                  router.push(`/match/${e.match.id}`);
+                  if (e.state !== "unstarted")
+                    router.push(`/match/${e?.match.id}`);
                 }}
               >
-                <td className="text-white w-1/4">{e.match.teams[0].name}</td>
+                <td className="text-white w-1/4">{e?.match.teams[0].name}</td>
                 <td className="w-1/5 text-center">
                   <img
-                    src={e.match.teams[0].image}
-                    alt={e.match.teams[0].name}
+                    src={e?.match.teams[0].image}
+                    alt={e?.match.teams[0].name}
                     className="w-28"
                   ></img>
                 </td>
@@ -71,17 +77,17 @@ const Schedule = (props: props) => {
                   className="text-white text-lg font-bold"
                   style={{ width: "10%" }}
                 >
-                  {`${e.match.teams[0].result?.gameWins} - ${e.match.teams[1].result?.gameWins}`}
+                  {`${e?.match.teams[0].result?.gameWins} - ${e?.match.teams[1].result?.gameWins}`}
                 </td>
                 <td className="w-1/5 text-center">
                   <img
-                    src={e.match.teams[1].image}
-                    alt={e.match.teams[1].name}
+                    src={e?.match.teams[1].image}
+                    alt={e?.match.teams[1].name}
                     className="w-28"
                   ></img>
                 </td>
 
-                <td className="text-white w-1/4">{e.match.teams[1].name}</td>
+                <td className="text-white w-1/4">{e?.match.teams[1].name}</td>
               </tr>
             </Fragment>
           );
