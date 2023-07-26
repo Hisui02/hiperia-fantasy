@@ -39,8 +39,6 @@ export default async function Home() {
 
   const [schedule] = await Promise.all([scheduleData]);
 
-  console.log(schedule);
-
   //const schedule = await getSchedule();
 
   return (
