@@ -5,8 +5,22 @@ const getMatchDetails = async (matchId: string) => {
   //      si es el directo, o gestionar otro fetch para cuando el partido ha acabado, intentar reutilizar
   //      esta página para ambos casos
 
+  //El timestamp no funciona correctamente¿?
+
+  //Añadiendo el startingTime nos aseguramos los últimos datos posibles
+
+  const hoy = new Date();
+  hoy.setSeconds(0, 0);
+  hoy.setMinutes(hoy.getMinutes() - 1);
+
+  // console.log(hoy.toISOString());
+  // console.log(BigInt(matchId) + BigInt(1));
+
+  //Calculo el gameId añadiendo 1 al matchId que llega por parámetros
+  const gameId = (BigInt(matchId) + BigInt(1)).toString();
+
   const res = await fetch(
-    `https://feed.lolesports.com/livestats/v1/window/${+matchId + 1}`
+    `https://feed.lolesports.com/livestats/v1/window/${gameId}?startingTime?=${hoy.toISOString()}`
   );
   if (!res.ok) {
     throw new Error(`Could not fetch match details.`);
