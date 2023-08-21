@@ -35,6 +35,8 @@ body {
   div#__next,
   div#__next > div {
     height: 100%;
-    background-image: linear-gradient(#112754, #111153, #0a093e, #020024);
+    /* background-image: linear-gradient(#112754, #111153, #0a093e, #020024); */
+    background-image: url("./../public/loginBackground.png");
+    background-position: center;
   }
 }

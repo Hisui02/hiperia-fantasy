@@ -1,3 +1,5 @@
+"use client";
+
 import Schedule from "@/components/home/Schedule";
 import { ScheduleInterface } from "@/Interfaces";
 import Link from "next/link";
@@ -39,22 +41,14 @@ export default async function Home() {
 
   const [schedule] = await Promise.all([scheduleData]);
 
-  //const schedule = await getSchedule();
-
   return (
     <div className="grid lg:grid-cols-3 grid-cols-1 gap-4 m-5">
       <div className="bg-gray-200 rounded-xl">
         <Schedule schedule={schedule} />
       </div>
       <div className="col-span-2 grid grid-rows-2 gap-4 ">
-        <div className="bg-gray-200 rounded-xl">
-          <Link href={`/match/1234`} as={`/match/1234`}>
-            test
-          </Link>
-        </div>
-        <div className="bg-gray-200 rounded-xl">
-          <p>a</p>
-        </div>
+        <div className="bg-gray-200 rounded-xl">a</div>
+        <div className="bg-gray-200 rounded-xl">a</div>
       </div>
     </div>
   );

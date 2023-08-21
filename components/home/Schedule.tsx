@@ -1,5 +1,3 @@
-"use client";
-
 import { ScheduleInterface } from "@/Interfaces";
 import { Fragment } from "react";
 import { useRouter } from "next/navigation";
@@ -15,15 +13,27 @@ const Schedule = (props: props) => {
   const firstMatchIndex = eventsArray.findIndex((e) => {
     return new Date(e.startTime).getTime() < new Date().getTime();
   });
-  const events = [
-    eventsArray[firstMatchIndex - 1],
-    eventsArray[firstMatchIndex],
-    eventsArray[firstMatchIndex + 1],
-    eventsArray[firstMatchIndex + 2],
-    eventsArray[firstMatchIndex + 3],
-  ];
 
-  console.log(events);
+  let eventsdata = [];
+
+  if (eventsArray[firstMatchIndex - 1]) {
+    eventsdata = [
+      eventsArray[firstMatchIndex - 1],
+      eventsArray[firstMatchIndex],
+      eventsArray[firstMatchIndex + 1],
+      eventsArray[firstMatchIndex + 2],
+      eventsArray[firstMatchIndex + 3],
+    ];
+  } else {
+    eventsdata = [
+      eventsArray[firstMatchIndex],
+      eventsArray[firstMatchIndex + 1],
+      eventsArray[firstMatchIndex + 2],
+      eventsArray[firstMatchIndex + 3],
+      eventsArray[firstMatchIndex + 4],
+    ];
+  }
+  const events = eventsdata;
 
   return (
     <table className="table w-full bg-black rounded-xl">
@@ -58,7 +68,7 @@ const Schedule = (props: props) => {
 
               <tr
                 className={`text-center bg-blue-950 ${
-                  e.state !== "unstarted" && "cursor-pointer"
+                  e?.state !== "unstarted" && "cursor-pointer"
                 }`}
                 onClick={() => {
                   if (e.state !== "unstarted")
@@ -70,20 +80,17 @@ const Schedule = (props: props) => {
                   <img
                     src={e?.match.teams[0].image}
                     alt={e?.match.teams[0].name}
-                    className="w-28"
+                    className="w-20"
                   ></img>
                 </td>
-                <td
-                  className="text-white text-lg font-bold"
-                  style={{ width: "10%" }}
-                >
+                <td className="text-white font-bold" style={{ width: "10%" }}>
                   {`${e?.match.teams[0].result?.gameWins} - ${e?.match.teams[1].result?.gameWins}`}
                 </td>
                 <td className="w-1/5 text-center">
                   <img
                     src={e?.match.teams[1].image}
                     alt={e?.match.teams[1].name}
-                    className="w-28"
+                    className="w-20"
                   ></img>
                 </td>
 
