@@ -105,13 +105,6 @@ export default async function Page({ params }: Params) {
         PlayerInventory={playerInventory}
         Champion={championId}
       />
-      // <div>a</div>
     );
   });
-
-  // <FullPlayerData
-  //       Player={player}
-  //       PlayerInventory={playerInventory}
-  //       Champion={championId}
-  //     />
 }
