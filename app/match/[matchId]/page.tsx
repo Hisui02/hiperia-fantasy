@@ -6,6 +6,7 @@ import ChampionImage from "@/components/matchDetails/championImage";
 import PlayerInventory from "@/components/matchDetails/playerInventory";
 import PlayerStats from "@/components/matchDetails/playerStats";
 import FullPlayerData from "@/components/matchDetails/fullPlayerData";
+import { spawn } from "child_process";
 
 const getMatchDetails = async (matchId: string) => {
   const hoy = new Date(); //Añadiendo el startingTime nos aseguramos los últimos datos posibles
@@ -65,51 +66,48 @@ export default async function Page({ params }: Params) {
   const lastMatchDetailsFrameIndex = matchDetails.frames.length - 1;
   const lastPlayerDetailsFrameIndex = playerDetails.frames.length - 1;
 
-  const playerInventory =
-    playerDetails.frames[lastPlayerDetailsFrameIndex].participants[0].items;
-
-  // console.log(playerInventory);
-  const player2 = {
-    playername:
-      matchDetails.gameMetadata.blueTeamMetadata.participantMetadata[0]
-        .summonerName,
-    ...playerDetails.frames[lastPlayerDetailsFrameIndex].participants[0],
-  };
-
-  const championId =
-    matchDetails.gameMetadata.blueTeamMetadata.participantMetadata[0]
-      .championId;
-
-  // matchDetails.frames[lastMatchDetailsFrameIndex].blueTeam.participants
-
-  matchDetails.frames[lastMatchDetailsFrameIndex].blueTeam.participants.map(
-    (p) => {
-      const player = {
-        playername:
-          matchDetails.gameMetadata.blueTeamMetadata.participantMetadata.find(
-            (j) => {
-              return j.participantId === p.participantId;
-            }
-          )?.summonerName,
-        ...playerDetails.frames[lastPlayerDetailsFrameIndex].participants.find(
+  return matchDetails.frames[
+    lastMatchDetailsFrameIndex
+  ].blueTeam.participants.map((p) => {
+    //Mapeo el player
+    const player = {
+      playername:
+        matchDetails.gameMetadata.blueTeamMetadata.participantMetadata.find(
           (j) => {
             return j.participantId === p.participantId;
           }
-        ),
-      };
-      console.log(player);
-      // console.log(player2);
+        )!.summonerName,
+      ...playerDetails.frames[lastPlayerDetailsFrameIndex].participants.find(
+        (j) => {
+          return j.participantId === p.participantId;
+        }
+      ),
+    };
 
-      return (
-        <FullPlayerData
-          Player={player}
-          PlayerInventory={playerInventory}
-          Champion={championId}
-        />
-        // <div>a</div>
-      );
-    }
-  );
+    //Mapeo el inventario
+    const playerInventory = playerDetails.frames[
+      lastPlayerDetailsFrameIndex
+    ].participants.find((j) => {
+      return j.participantId === p.participantId;
+    })!.items;
+
+    //Mapeo el champion
+    const championId =
+      matchDetails.gameMetadata.blueTeamMetadata.participantMetadata.find(
+        (j) => {
+          return j.participantId === p.participantId;
+        }
+      )!.championId;
+
+    return (
+      <FullPlayerData
+        Player={player}
+        PlayerInventory={playerInventory}
+        Champion={championId}
+      />
+      // <div>a</div>
+    );
+  });
 
   // <FullPlayerData
   //       Player={player}
