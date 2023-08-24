@@ -64,7 +64,7 @@ export default function PlayerInventory(props: {
         })}
       </div>
       <ItemImage
-        item={ward as number}
+        Item={ward as number}
         ClassName={`h-fit ml-1 ${props.ClassName}`}
       />
     </div>
