@@ -35,8 +35,20 @@ body {
   div#__next,
   div#__next > div {
     height: 100%;
-    /* background-image: linear-gradient(#112754, #111153, #0a093e, #020024); */
-    background-image: url("./../public/loginBackground.png");
-    background-position: center;
+    background: rgb(9, 9, 121);
+    background: radial-gradient(
+      circle,
+      rgba(9, 9, 121, 1) 0%,
+      rgba(2, 0, 36, 1) 50%,
+      rgba(0, 212, 255, 1) 100%
+    );
+
+    @media (min-width: 1024px) {
+      /* background-image: linear-gradient(#112754, #111153, #0a093e, #020024); */
+      background-image: url("./../public/loginBackground.png");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
   }
 }

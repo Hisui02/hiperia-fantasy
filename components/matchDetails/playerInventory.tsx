@@ -1,19 +1,19 @@
 import ItemImage from "./itemImage";
 
 function countDuplicates(arr: any) {
-  const counts = {} as any;
   const result = [];
+  let count2055 = 0;
 
   for (const item of arr) {
-    if (counts[item]) {
-      counts[item]++;
+    if (item === 2055) {
+      count2055++;
     } else {
-      counts[item] = 1;
+      result.push({ item: item, count: 1 });
     }
   }
 
-  for (const key in counts) {
-    result.push({ item: parseInt(key), count: counts[key] });
+  if (count2055 > 0) {
+    result.push({ item: 2055, count: count2055 });
   }
 
   return result;
@@ -21,9 +21,18 @@ function countDuplicates(arr: any) {
 
 export default function PlayerInventory(props: {
   PlayerInventory: Array<number>;
-  ClassName?: string;
+  ItemSize: string;
+  Team: string;
 }) {
   //   console.log(props.PlayerInventory);
+
+  const manageOrientation = (teamColor: string) => {
+    if (teamColor == "red") {
+      return "flex-row-reverse";
+    } else {
+      return "flex-row";
+    }
+  };
 
   const { PlayerInventory: inventory } = props;
 
@@ -46,27 +55,28 @@ export default function PlayerInventory(props: {
     itemsWCuantity.push({ item: -1, count: 1 });
   }
 
-  console.log(itemsWCuantity);
+  // console.log(itemsWCuantity);
   // console.log(inventory);
   // console.log(ward);
 
   return (
-    <div className="flex flex-row">
-      <div className="grid grid-cols-3 gap-1 w-fit">
+    <div
+      className={`flex ${manageOrientation(
+        props.Team
+      )} justify-center xl:w-2/5 ml-1 mr-1`}
+    >
+      <div className="grid grid-cols-3 gap-2 ml-1 mr-1">
         {itemsWCuantity.map((i) => {
           return (
             <ItemImage
               Item={i.item}
               Count={i.count}
-              ClassName={props.ClassName}
+              ClassName={`w-${props.ItemSize}`}
             />
           );
         })}
       </div>
-      <ItemImage
-        Item={ward as number}
-        ClassName={`h-fit ml-1 ${props.ClassName}`}
-      />
+      <ItemImage Item={ward as number} ClassName={`w-${props.ItemSize}`} />
     </div>
   );
 }

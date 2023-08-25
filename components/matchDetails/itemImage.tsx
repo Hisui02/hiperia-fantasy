@@ -13,10 +13,17 @@ export default function ItemImage(props: {
   }
 
   return (
-    <img
-      className={props.ClassName}
-      src={src}
-      alt={props.Item as unknown as string}
-    />
+    <div className={`relative grid`}>
+      <img
+        className={props.ClassName}
+        src={src}
+        alt={props.Item as unknown as string}
+      />
+      {props.Count && props.Count > 1 && (
+        <span className="absolute text-lg text-white bottom-0 right-0 leading-3">
+          {props.Count}
+        </span>
+      )}
+    </div>
   );
 }

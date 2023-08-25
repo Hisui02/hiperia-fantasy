@@ -11,33 +11,31 @@ interface Props {
   Player: Player;
   PlayerInventory: [number];
   Champion: string;
+  ClassName?: string;
+  Team: string;
 }
 
 export default function FullPlayerData(props: Props) {
-  const teamColor: string = "red";
-
   const manageOrientation = (teamColor: string) => {
     if (teamColor == "red") {
-      return "flex-row";
-    } else {
       return "flex-row-reverse";
+    } else {
+      return "flex-row";
     }
   };
 
   return (
     <div
-      className={`bg-red-800 flex ${manageOrientation(
-        "red"
-      )} items-center w-fit h-fit`}
+      className={`flex content-center justify-center flex-wrap ${manageOrientation(
+        props.Team
+      )} w-full ${props.ClassName}`}
     >
-      <ChampionImage Champion={props.Champion} ClassName="w-16 inline" />
-      <PlayerStats
-        Player={props.Player}
-        ClassName="m-2 flex flex-col items-center"
-      />
+      <ChampionImage Champion={props.Champion} />
+      <PlayerStats Player={props.Player} />
       <PlayerInventory
         PlayerInventory={props.PlayerInventory}
-        ClassName="w-8"
+        ItemSize="10"
+        Team={props.Team}
       />
     </div>
   );
