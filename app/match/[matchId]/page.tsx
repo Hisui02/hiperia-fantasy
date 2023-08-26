@@ -2,15 +2,14 @@ import { MatchData } from "@/Interfaces";
 import { MatchPlayerDetails } from "@/Interfaces";
 import FullPlayerData from "@/components/matchDetails/fullPlayerData";
 
-const getMatchDetails = async (matchId: string) => {
-  const hoy = new Date(); //Añadiendo el startingTime nos aseguramos los últimos datos posibles
-  hoy.setSeconds(0, 0);
-  hoy.setMinutes(hoy.getMinutes() - 1);
+const hoy = new Date(); //Añadiendo el startingTime nos aseguramos los últimos datos posibles
+hoy.setSeconds(0, 0);
+hoy.setMinutes(hoy.getMinutes() - 1);
 
-  const gameId = BigInt(matchId) + BigInt(1); //Calculo el gameId como el matchId+1
-
+const getMatchDetails = async (gameId: string) => {
   const res = await fetch(
-    `https://feed.lolesports.com/livestats/v1/window/${gameId.toString()}?startingTime=${hoy.toISOString()}`
+    `https://feed.lolesports.com/livestats/v1/window/${gameId.toString()}?startingTime=${hoy.toISOString()}`,
+    { next: { revalidate: 0 } }
   );
   if (!res.ok) {
     throw new Error(`Could not fetch match details.`);
@@ -19,16 +18,10 @@ const getMatchDetails = async (matchId: string) => {
   }
 };
 
-const getPlayersDetails = async (matchId: string) => {
-  const hoy = new Date(); //Añadiendo el startingTime nos aseguramos los últimos datos posibles
-  hoy.setSeconds(0, 0);
-  hoy.setMinutes(hoy.getMinutes() - 20);
-
-  const gameId = BigInt(matchId) + BigInt(1); //Calculo el gameId como el matchId+1
-
+const getPlayersDetails = async (gameId: string) => {
   const res = await fetch(
     `https://feed.lolesports.com/livestats/v1/details/${gameId.toString()}?startingTime=${hoy.toISOString()}&participantIds=1_2_3_4_5_6_7_8_9_10`,
-    { next: { revalidate: 30 } }
+    { next: { revalidate: 0 } }
   );
   if (!res.ok) {
     throw new Error(`Could not fetch players details.`);
@@ -44,13 +37,16 @@ interface Params {
 }
 
 export default async function Page({ params }: Params) {
-  // const matchDetails: MatchData = await getMatchDetails(params.matchId);
+  const gameId = BigInt(params.matchId) + BigInt(2); //Calculo el gameId como el matchId+Numero de Game
 
-  const matchDetailsData: Promise<MatchData> = getMatchDetails(params.matchId);
-  const playersDetailsData: Promise<MatchPlayerDetails> = getPlayersDetails(
-    params.matchId
+  const matchDetailsData: Promise<MatchData> = getMatchDetails(
+    gameId as unknown as string
   );
-  let [matchDetails, playerDetails] = await Promise.all([
+  const playersDetailsData: Promise<MatchPlayerDetails> = getPlayersDetails(
+    gameId as unknown as string
+  );
+
+  const [matchDetails, playerDetails] = await Promise.all([
     matchDetailsData,
     playersDetailsData,
   ]);
