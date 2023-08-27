@@ -57,7 +57,7 @@ export const authOptions: NextAuthOptions = {
       return token;
     },
     session({ session, token }) {
-      const { password, ...tokenWithoutPassword } = token.user;
+      const { password, ...tokenWithoutPassword } = token.user as any;
       session.user = tokenWithoutPassword;
       return session;
     },
