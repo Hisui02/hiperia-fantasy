@@ -75,26 +75,28 @@ const Schedule = (props: props) => {
                     router.push(`/match/${e?.match.id}`);
                 }}
               >
-                <td className="text-white w-1/4">{e?.match.teams[0].name}</td>
+                <td className="text-white w-1/4">{e?.match?.teams[0].name}</td>
                 <td className="w-1/5 text-center">
                   <img
-                    src={e?.match.teams[0].image}
-                    alt={e?.match.teams[0].name}
+                    src={e?.match?.teams[0].image}
+                    alt={e?.match?.teams[0].name}
                     className="w-20"
                   ></img>
                 </td>
-                <td className="text-white font-bold" style={{ width: "10%" }}>
-                  {`${e?.match.teams[0].result?.gameWins} - ${e?.match.teams[1].result?.gameWins}`}
+                <td className="text-white font-bold w-[10%]">
+                  {`${e?.match?.teams[0].result?.gameWins || 0} - ${
+                    e?.match?.teams[1].result?.gameWins || 0
+                  }`}
                 </td>
                 <td className="w-1/5 text-center">
                   <img
-                    src={e?.match.teams[1].image}
-                    alt={e?.match.teams[1].name}
+                    src={e?.match?.teams[1].image}
+                    alt={e?.match?.teams[1].name}
                     className="w-20"
                   ></img>
                 </td>
 
-                <td className="text-white w-1/4">{e?.match.teams[1].name}</td>
+                <td className="text-white w-1/4">{e?.match?.teams[1].name}</td>
               </tr>
             </Fragment>
           );
