@@ -72,7 +72,7 @@ export default async function Layout({
         &gt;
       </Link>
 
-      <main>{children}</main>
+      {children}
     </>
   );
 }

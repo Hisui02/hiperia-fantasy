@@ -58,7 +58,7 @@ export default async function Page({ params }: Params) {
   const lastPlayerDetailsFrameIndex = playerDetails.frames.length - 1;
 
   return (
-    <div className="flex justify-center p-10 xl:w-3/5 w-full">
+    <div className="flex justify-center p-10 xl:w-2/3 w-full">
       <div className="grid grid-cols-1 md:grid-cols-2 bg-gray-900 rounded-xl p-5 w-full">
         <div className="border-r-[1px] border-black">
           {matchDetails.frames[

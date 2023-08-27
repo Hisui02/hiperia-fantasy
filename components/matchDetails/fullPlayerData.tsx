@@ -24,17 +24,27 @@ export default function FullPlayerData(props: Props) {
     }
   };
 
+  const potion = props.PlayerInventory.find((i) => {
+    return i == 2138 || i == 2139 || i == 2140;
+  });
+
+  const inventory = props.PlayerInventory.filter((i) => {
+    return i != potion;
+  });
+
+  // console.log(potion);
+
   return (
     <div
       className={`flex content-center justify-center flex-wrap ${manageOrientation(
         props.Team
       )} w-full ${props.ClassName}`}
     >
-      <ChampionImage Champion={props.Champion} />
+      <ChampionImage Champion={props.Champion} Potion={potion} />
       <PlayerStats Player={props.Player} />
       <PlayerInventory
-        PlayerInventory={props.PlayerInventory}
-        ItemSize="10"
+        PlayerInventory={inventory}
+        ItemSize="11"
         Team={props.Team}
       />
     </div>

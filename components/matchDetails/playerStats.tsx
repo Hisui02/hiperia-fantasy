@@ -8,7 +8,7 @@ export default function PlayerStats(props: { Player: ParticipantName }) {
   const player = props.Player;
 
   return (
-    <div className="xl:w-2/5 flex flex-col items-center justify-center text-gray-300 text-lg ml-1 mr-1">
+    <div className="xl:w-2/5 p-1 flex flex-col items-center justify-center text-gray-300 text-lg">
       <span>{player.playername}</span>
       <span>{`${player.kills}/${player.deaths}/${player.assists}     ${player.creepScore} cs`}</span>
     </div>

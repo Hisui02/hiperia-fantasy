@@ -37,10 +37,7 @@ export default function PlayerInventory(props: {
   const { PlayerInventory: inventory } = props;
 
   let ward = inventory.find((i) => {
-    return (
-      i == 3363 || //Blue Ward
-      i == 3364 //Red Ward
-    );
+    return i == 3363 || i == 3364;
   });
 
   if (!ward) ward = 3340; //El ward estándar no viene en el inv, se aplica por defecto
@@ -63,7 +60,7 @@ export default function PlayerInventory(props: {
     <div
       className={`flex ${manageOrientation(
         props.Team
-      )} justify-center xl:w-2/5 ml-1 mr-1`}
+      )} justify-center xl:w-2/5 p-1`}
     >
       <div className="grid grid-cols-3 gap-2 ml-1 mr-1">
         {itemsWCuantity.map((i) => {
