@@ -1,3 +1,5 @@
+"use client";
+
 import { ScheduleInterface } from "@/Interfaces";
 import { Fragment } from "react";
 import { useRouter } from "next/navigation";
@@ -9,7 +11,11 @@ type props = {
 const Schedule = (props: props) => {
   const router = useRouter();
 
-  const eventsArray = props.schedule.data.schedule.events.reverse();
+  const eventsArray = props.schedule.data.schedule.events
+    .reverse()
+    .filter((e) => {
+      return e.type == "match";
+    });
   const firstMatchIndex = eventsArray.findIndex((e) => {
     return new Date(e.startTime).getTime() < new Date().getTime();
   });
@@ -35,6 +41,8 @@ const Schedule = (props: props) => {
   }
   const events = eventsdata;
 
+  // console.log(events);
+
   return (
     <table className="table w-full bg-black rounded-xl">
       <tbody>
@@ -56,7 +64,7 @@ const Schedule = (props: props) => {
                     .toLocaleString("es-ES", {
                       weekday: "long",
                     })
-                    .replace(/^\w/, (c) => c.toUpperCase())}
+                    .replace(/^\w/, (c) => c.toUpperCase())}{" "}
                 </td>
               </tr>
 

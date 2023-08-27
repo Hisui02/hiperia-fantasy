@@ -40,6 +40,7 @@ export default async function Home() {
   const scheduleData = getSchedule();
 
   const [schedule] = await Promise.all([scheduleData]);
+  // console.log(schedule);
 
   return (
     <div className="grid lg:grid-cols-3 grid-cols-1 gap-4 m-5">
