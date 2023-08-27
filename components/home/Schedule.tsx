@@ -44,7 +44,7 @@ const Schedule = (props: props) => {
   // console.log(events);
 
   return (
-    <table className="table w-full bg-black rounded-xl">
+    <table className="w-full">
       <tbody>
         {events.map((e) => {
           const timeFormat: Intl.DateTimeFormatOptions = {
@@ -75,8 +75,8 @@ const Schedule = (props: props) => {
               </tr>
 
               <tr
-                className={`text-center bg-blue-950 ${
-                  e?.state !== "unstarted" && "cursor-pointer"
+                className={`text-center bg-blue-950  ${
+                  e?.state !== "unstarted" ? "cursor-pointer" : ""
                 }`}
                 onClick={() => {
                   if (e.state !== "unstarted")
