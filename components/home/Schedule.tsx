@@ -4,14 +4,14 @@ import { ScheduleInterface } from "@/Interfaces";
 import { Fragment } from "react";
 import { useRouter } from "next/navigation";
 
-type props = {
-  schedule: ScheduleInterface;
+type Props = {
+  Schedule: ScheduleInterface;
 };
 
-const Schedule = (props: props) => {
+export default function Schedule(props: Props) {
   const router = useRouter();
 
-  const eventsArray = props.schedule.data.schedule.events
+  const eventsArray = props.Schedule.data.schedule.events
     .reverse()
     .filter((e) => {
       return e.type == "match";
@@ -112,6 +112,4 @@ const Schedule = (props: props) => {
       </tbody>
     </table>
   );
-};
-
-export default Schedule;
+}

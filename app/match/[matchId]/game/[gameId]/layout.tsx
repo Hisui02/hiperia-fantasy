@@ -59,6 +59,7 @@ export default async function Layout({
         )}`}
         href={`/match/${params.matchId}/game/${previousGameId}`}
         prefetch={false}
+        replace={true}
       >
         &lt;
       </Link>
@@ -68,6 +69,7 @@ export default async function Layout({
         )}`}
         href={`/match/${params.matchId}/game/${nextGameId}`}
         prefetch={false}
+        replace={true}
       >
         &gt;
       </Link>
