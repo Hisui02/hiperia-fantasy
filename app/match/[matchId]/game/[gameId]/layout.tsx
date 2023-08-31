@@ -54,7 +54,7 @@ export default async function Layout({
   return (
     <>
       <Link
-        className={`bg-gray-300 sticky top-[50vh] p-2 pb-3 rounded font-extrabold cursor-pointer inline-block hover:scale-150 hover:ml-3 duration-100  ${manageClasses(
+        className={`bg-secondary text-primary sticky top-[50vh] p-2 pb-3 rounded font-extrabold cursor-pointer inline-block hover:scale-150 hover:ml-3 duration-100  ${manageClasses(
           "previous"
         )}`}
         href={`/match/${params.matchId}/game/${previousGameId}`}
@@ -64,7 +64,7 @@ export default async function Layout({
         &lt;
       </Link>
       <Link
-        className={`bg-gray-300 sticky top-[50vh] left-[100vw] p-2 pb-3 rounded font-extrabold cursor-pointer inline-block hover:scale-150 hover:mr-3 duration-100 ${manageClasses(
+        className={`bg-secondary text-primary sticky top-[50vh] left-[100vw] p-2 pb-3 rounded font-extrabold cursor-pointer inline-block hover:scale-150 hover:mr-3 duration-100 ${manageClasses(
           "next"
         )}`}
         href={`/match/${params.matchId}/game/${nextGameId}`}

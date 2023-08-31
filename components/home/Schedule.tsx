@@ -1,8 +1,9 @@
 "use client";
 
 import { ScheduleInterface } from "@/Interfaces";
-import { Fragment } from "react";
+import { Fragment, Suspense } from "react";
 import { useRouter } from "next/navigation";
+import { Skeleton } from "../ui/skeleton";
 
 type Props = {
   Schedule: ScheduleInterface;
@@ -58,24 +59,35 @@ export default function Schedule(props: Props) {
           };
           return (
             <Fragment key={e?.startTime}>
-              <tr className="text-center bg-black text-white">
-                <td colSpan={5} className="font-bold text-lg">
-                  {new Date(e?.startTime)
-                    .toLocaleString("es-ES", {
-                      weekday: "long",
-                    })
-                    .replace(/^\w/, (c) => c.toUpperCase())}{" "}
+              <tr className="text-center bg-background">
+                <td colSpan={5} className="font-bold">
+                  <div className="p-1">
+                    <div className="text-lg h-5">
+                      {new Date(e?.startTime)
+                        .toLocaleString("es-ES", {
+                          weekday: "long",
+                        })
+                        .replace(/^\w/, (c) => c.toUpperCase())}{" "}
+                    </div>
+                  </div>
                 </td>
               </tr>
 
-              <tr className="text-center bg-black text-white">
-                <td colSpan={5} className="font-bold text-lg">
-                  {new Date(e?.startTime).toLocaleString("es-ES", timeFormat)}
+              <tr className="text-center bg-background">
+                <td colSpan={5} className="font-bold">
+                  <div className="p-1">
+                    <div className="text-lg h-5">
+                      {new Date(e?.startTime).toLocaleString(
+                        "es-ES",
+                        timeFormat
+                      )}
+                    </div>
+                  </div>
                 </td>
               </tr>
 
               <tr
-                className={`text-center bg-blue-950  ${
+                className={`text-center bg-primary-foreground ${
                   e?.state !== "unstarted" ? "cursor-pointer" : ""
                 }`}
                 onClick={() => {
@@ -83,28 +95,38 @@ export default function Schedule(props: Props) {
                     router.push(`/match/${e?.match.id}`);
                 }}
               >
-                <td className="text-white w-1/4">{e?.match?.teams[0].name}</td>
+                <td className="w-1/4">{e?.match?.teams[0].name}</td>
                 <td className="w-1/5 text-center">
-                  <img
-                    src={e?.match?.teams[0].image}
-                    alt={e?.match?.teams[0].name}
-                    className="w-20"
-                  ></img>
+                  <div className="p-4">
+                    <Suspense
+                      fallback={<Skeleton className="h-24 w-24 rounded-full" />}
+                    >
+                      <img
+                        src={e?.match?.teams[0].image}
+                        alt={e?.match?.teams[0].name}
+                        className="w-20"
+                      ></img>
+                    </Suspense>
+                  </div>
                 </td>
-                <td className="text-white font-bold w-[10%]">
+                <td className="font-bold w-[10%]">
                   {`${e?.match?.teams[0].result?.gameWins || 0} - ${
                     e?.match?.teams[1].result?.gameWins || 0
                   }`}
                 </td>
                 <td className="w-1/5 text-center">
-                  <img
-                    src={e?.match?.teams[1].image}
-                    alt={e?.match?.teams[1].name}
-                    className="w-20"
-                  ></img>
+                  <Suspense
+                    fallback={<Skeleton className="h-24 w-24 rounded-full" />}
+                  >
+                    <img
+                      src={e?.match?.teams[1].image}
+                      alt={e?.match?.teams[1].name}
+                      className="w-20"
+                    ></img>
+                  </Suspense>
                 </td>
 
-                <td className="text-white w-1/4">{e?.match?.teams[1].name}</td>
+                <td className="w-1/4">{e?.match?.teams[1].name}</td>
               </tr>
             </Fragment>
           );

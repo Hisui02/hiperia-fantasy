@@ -6,7 +6,7 @@ const getSchedule = async (): Promise<ScheduleInterface> => {
     setTimeout(
       r,
 
-      5000
+      3000
     )
   );
 
@@ -17,7 +17,7 @@ const getSchedule = async (): Promise<ScheduleInterface> => {
         accept: "*/*",
         "x-api-key": "0TvQnueqKa5mxJntVWt0w4LpLfEkrV1Ta8rQBb9Z",
       },
-      next: { revalidate: 0 },
+      next: { revalidate: 10 },
     }
   );
 

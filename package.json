@@ -10,20 +10,28 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.7.14",
+    "@radix-ui/react-switch": "^1.0.3",
     "@types/node": "20.2.3",
-    "@types/react": "18.2.7",
+    "@types/react": "^18.2.21",
     "@types/react-dom": "18.2.4",
-    "autoprefixer": "10.4.14",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.0.0",
     "eslint": "8.41.0",
     "eslint-config-next": "^13.4.6",
+    "lucide-react": "^0.269.0",
     "mongodb": "^5.6.0",
     "mongoose": "^7.3.1",
-    "next": "^13.4.8",
+    "next": "^13.4.19",
     "next-auth": "^4.22.1",
-    "postcss": "8.4.23",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "tailwindcss": "3.3.2",
-    "typescript": "5.0.4"
+    "tailwind-merge": "^1.14.0",
+    "tailwindcss-animate": "^1.0.7",
+    "typescript": "^5.2.2"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.15",
+    "postcss": "^8.4.28",
+    "tailwindcss": "^3.3.3"
   }
 }

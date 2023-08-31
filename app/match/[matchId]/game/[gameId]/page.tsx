@@ -1,6 +1,7 @@
 import { MatchData } from "@/Interfaces";
 import { MatchPlayerDetails } from "@/Interfaces";
 import FullPlayerData from "@/components/matchDetails/fullPlayerData";
+import PlayerRunes from "@/components/matchDetails/playerRunes";
 
 const hoy = new Date(); //Añadiendo el startingTime nos aseguramos los últimos datos posibles
 hoy.setSeconds(0, 0);
@@ -57,103 +58,116 @@ export default async function Page({ params }: Params) {
   const lastMatchDetailsFrameIndex = matchDetails.frames.length - 1;
   const lastPlayerDetailsFrameIndex = playerDetails.frames.length - 1;
 
+  const tempPerks =
+    playerDetails.frames[lastPlayerDetailsFrameIndex].participants[0]
+      .perkMetadata;
+
   return (
-    <div className="flex justify-center p-10 xl:w-2/3 w-full">
-      <div className="grid grid-cols-1 md:grid-cols-2 bg-gray-900 rounded-xl p-5 w-full">
-        <div className="border-r-[1px] border-black">
-          {matchDetails.frames[
-            lastMatchDetailsFrameIndex
-          ].blueTeam.participants.map((p) => {
-            //Mapeo el player
-            const player = {
-              playername:
-                matchDetails.gameMetadata.blueTeamMetadata.participantMetadata.find(
-                  (j) => {
+    <div className="grid grid-cols-3 gap-4 pl-10 pr-10">
+      <div className="lg:col-span-2 col-span-3">
+        <div className="flex justify-center w-full">
+          <div className="grid grid-cols-1 md:grid-cols-2 bg-background rounded-xl p-5 w-full">
+            <div className="lg:border-r-[1px] border-secondary-foreground">
+              {matchDetails.frames[
+                lastMatchDetailsFrameIndex
+              ].blueTeam.participants.map((p) => {
+                //Mapeo el player
+                const player = {
+                  playername:
+                    matchDetails.gameMetadata.blueTeamMetadata.participantMetadata.find(
+                      (j) => {
+                        return j.participantId === p.participantId;
+                      }
+                    )!.summonerName,
+                  ...playerDetails.frames[
+                    lastPlayerDetailsFrameIndex
+                  ].participants.find((j) => {
                     return j.participantId === p.participantId;
-                  }
-                )!.summonerName,
-              ...playerDetails.frames[
-                lastPlayerDetailsFrameIndex
-              ].participants.find((j) => {
-                return j.participantId === p.participantId;
-              })!,
-            };
+                  })!,
+                };
 
-            //Mapeo el inventario
-            const playerInventory = playerDetails.frames[
-              lastPlayerDetailsFrameIndex
-            ].participants.find((j) => {
-              return j.participantId === p.participantId;
-            })!.items;
-
-            //Mapeo el champion
-            const championId =
-              matchDetails.gameMetadata.blueTeamMetadata.participantMetadata.find(
-                (j) => {
+                //Mapeo el inventario
+                const playerInventory = playerDetails.frames[
+                  lastPlayerDetailsFrameIndex
+                ].participants.find((j) => {
                   return j.participantId === p.participantId;
-                }
-              )!.championId;
+                })!.items;
 
-            return (
-              <FullPlayerData
-                Player={player}
-                PlayerInventory={playerInventory}
-                Champion={championId}
-                ClassName={`p-2 ${
-                  p.participantId % 5 != 0 && "border-b-2 border-black"
-                }`}
-                Team="blue"
-              />
-            );
-          })}
-        </div>
-        <div className="border-l-[1px] border-black">
-          {matchDetails.frames[
-            lastMatchDetailsFrameIndex
-          ].redTeam.participants.map((p) => {
-            //Mapeo el player
-            const player = {
-              playername:
-                matchDetails.gameMetadata.redTeamMetadata.participantMetadata.find(
-                  (j) => {
+                //Mapeo el champion
+                const championId =
+                  matchDetails.gameMetadata.blueTeamMetadata.participantMetadata.find(
+                    (j) => {
+                      return j.participantId === p.participantId;
+                    }
+                  )!.championId;
+
+                return (
+                  <FullPlayerData
+                    Player={player}
+                    PlayerInventory={playerInventory}
+                    Champion={championId}
+                    ClassName={`p-2 ${
+                      p.participantId % 5 != 0 &&
+                      "border-b-2 border-secondary-foreground"
+                    }`}
+                    Team="blue"
+                  />
+                );
+              })}
+            </div>
+            <div className="lg:border-l-[1px] border-secondary-foreground">
+              {matchDetails.frames[
+                lastMatchDetailsFrameIndex
+              ].redTeam.participants.map((p) => {
+                //Mapeo el player
+                const player = {
+                  playername:
+                    matchDetails.gameMetadata.redTeamMetadata.participantMetadata.find(
+                      (j) => {
+                        return j.participantId === p.participantId;
+                      }
+                    )!.summonerName,
+                  ...playerDetails.frames[
+                    lastPlayerDetailsFrameIndex
+                  ].participants.find((j) => {
                     return j.participantId === p.participantId;
-                  }
-                )!.summonerName,
-              ...playerDetails.frames[
-                lastPlayerDetailsFrameIndex
-              ].participants.find((j) => {
-                return j.participantId === p.participantId;
-              })!,
-            };
+                  })!,
+                };
 
-            //Mapeo el inventario
-            const playerInventory = playerDetails.frames[
-              lastPlayerDetailsFrameIndex
-            ].participants.find((j) => {
-              return j.participantId === p.participantId;
-            })!.items;
-
-            //Mapeo el champion
-            const championId =
-              matchDetails.gameMetadata.redTeamMetadata.participantMetadata.find(
-                (j) => {
+                //Mapeo el inventario
+                const playerInventory = playerDetails.frames[
+                  lastPlayerDetailsFrameIndex
+                ].participants.find((j) => {
                   return j.participantId === p.participantId;
-                }
-              )!.championId;
+                })!.items;
 
-            return (
-              <FullPlayerData
-                Player={player}
-                PlayerInventory={playerInventory}
-                Champion={championId}
-                ClassName={`p-2 ${
-                  p.participantId % 5 != 0 && "border-b-2 border-black"
-                }`}
-                Team="red"
-              />
-            );
-          })}
+                //Mapeo el champion
+                const championId =
+                  matchDetails.gameMetadata.redTeamMetadata.participantMetadata.find(
+                    (j) => {
+                      return j.participantId === p.participantId;
+                    }
+                  )!.championId;
+
+                return (
+                  <FullPlayerData
+                    Player={player}
+                    PlayerInventory={playerInventory}
+                    Champion={championId}
+                    ClassName={`p-2 ${
+                      p.participantId % 5 != 0 &&
+                      "border-b-2 border-secondary-foreground"
+                    }`}
+                    Team="red"
+                  />
+                );
+              })}
+            </div>
+          </div>
         </div>
+      </div>
+      <div className="lg:col-span-1 col-span-3 bg-background rounded-xl p-5">
+        <PlayerRunes perkMetadata={tempPerks} />
       </div>
     </div>
   );
