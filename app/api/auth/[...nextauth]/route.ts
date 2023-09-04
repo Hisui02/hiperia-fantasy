@@ -1,6 +1,6 @@
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { connectDB } from "@/libs/mongodb";
+import { connectDB } from "@/lib/mongodb";
 import type { NextAuthOptions } from "next-auth";
 import User from "@/models/user";
 
@@ -57,7 +57,7 @@ export const authOptions: NextAuthOptions = {
       return token;
     },
     session({ session, token }) {
-      const { password, ...tokenWithoutPassword } = token.user;
+      const { password, ...tokenWithoutPassword } = token.user as any;
       session.user = tokenWithoutPassword;
       return session;
     },

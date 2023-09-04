@@ -17,7 +17,7 @@ interface Pages {
 
 export interface Event {
   startTime: string;
-  state: string;
+  state: "unstarted" | "completed" | "inProgress";
   type: string;
   blockName: string;
   league: League;
