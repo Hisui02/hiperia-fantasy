@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { SummonerInterface } from "@/Interfaces/Summoner";
+import { signOut } from "next-auth/react";
 
 import HiperiaLogo from "../public/hiperia_logo.svg";
 
@@ -25,7 +26,7 @@ export default async function ToolBar(props: { summoner: SummonerInterface }) {
   };
 
   return (
-    <Disclosure as="nav" className="bg-gray-800">
+    <Disclosure as="nav" className="bg-background">
       {({ open }) => (
         <>
           <div className="mx-auto px-2 sm:px-6 lg:px-8">
@@ -71,7 +72,7 @@ export default async function ToolBar(props: { summoner: SummonerInterface }) {
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
-                  <Link href="/">
+                  <Link href="/home">
                     <img
                       className="block h-8 w-auto lg:hidden"
                       src={HiperiaLogo.src}
@@ -94,7 +95,7 @@ export default async function ToolBar(props: { summoner: SummonerInterface }) {
                         className={classNames(
                           item.current
                             ? "bg-gray-900 text-white"
-                            : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                            : "text-primary hover:bg-primary-foreground hover:text-white",
                           "rounded-md px-3 py-2 text-sm font-medium"
                         )}
                         aria-current={item.current ? "page" : undefined}
@@ -106,20 +107,20 @@ export default async function ToolBar(props: { summoner: SummonerInterface }) {
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <span className="hover:text-white text-gray-400">
+                <span className="text-primary hover:font-bold">
                   {props.summoner.name}
                 </span>
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
                   <div>
-                    <Menu.Button className="flex rounded-full bg-gray-800 text-sm">
+                    <Menu.Button className="flex rounded-full text-sm">
                       <div>
                         <img
                           className="h-11 w-11 rounded-full relative top-2"
                           src={PlayerLogo.src}
                           alt={PlayerLogo.alt}
                         />
-                        <span className="relative bottom-1 font-semibold text-xs text-gray-400 bg-black rounded-xl px-2">
+                        <span className="relative bottom-1 font-semibold text-xs text-primary bg-background rounded-xl px-2">
                           {props.summoner.summonerLevel}
                         </span>
                       </div>
@@ -134,14 +135,14 @@ export default async function ToolBar(props: { summoner: SummonerInterface }) {
                     leaveFrom="transform opacity-100 scale-100"
                     leaveTo="transform opacity-0 scale-95"
                   >
-                    <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-primary py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                       <Menu.Item>
                         {({ active }) => (
                           <Link
                             href="/profile"
                             className={classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
+                              active ? "bg-foreground" : "",
+                              "block px-4 py-2 text-sm text-secondary"
                             )}
                           >
                             Perfil
@@ -151,15 +152,17 @@ export default async function ToolBar(props: { summoner: SummonerInterface }) {
 
                       <Menu.Item>
                         {({ active }) => (
-                          <Link
-                            href="/login"
+                          <p
+                            onClick={() => {
+                              signOut({ callbackUrl: "/" });
+                            }}
                             className={classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
+                              active ? "bg-foreground" : "",
+                              "block px-4 py-2 text-sm text-secondary cursor-pointer"
                             )}
                           >
                             Cerrar Sesión
-                          </Link>
+                          </p>
                         )}
                       </Menu.Item>
                     </Menu.Items>
@@ -178,7 +181,7 @@ export default async function ToolBar(props: { summoner: SummonerInterface }) {
                     className={classNames(
                       item.current
                         ? "bg-gray-900 text-white"
-                        : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                        : "text-primary hover:bg-primary-foreground hover:text-white",
                       "block rounded-md px-3 py-2 text-base font-medium"
                     )}
                     aria-current={item.current ? "page" : undefined}

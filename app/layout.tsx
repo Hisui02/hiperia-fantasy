@@ -1,7 +1,10 @@
-import ToolBar from "@/components/ToolBar";
 import "./globals.css";
 import { Inter } from "next/font/google";
+import NextAuthSessionProvider from "./providers/sessionProvider";
+import ToolBar from "@/components/ToolBar";
 import { SummonerInterface } from "@/Interfaces/Summoner";
+import { getServerSession } from "next-auth";
+import { authOptions } from "./api/auth/[...nextauth]/route";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,26 +20,28 @@ const getSummonerData = async (sum: string): Promise<SummonerInterface> => {
   );
 
   if (!res.ok) {
-    throw new Error("Failed to fetch data");
+    throw new Error("Failed to fetch Riot API Summoner Profile");
   }
 
   return res.json();
 };
-
-const summonerName: string = "Hisui02";
 
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const summonerData = await getSummonerData(summonerName);
+  const session = await getServerSession(authOptions);
+
+  const summonerData = await getSummonerData(session?.user?.username as string);
 
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ToolBar summoner={summonerData} />
-        <main>{children}</main>
+        <NextAuthSessionProvider>
+          {session && <ToolBar summoner={summonerData} />}
+          <main>{children}</main>
+        </NextAuthSessionProvider>
       </body>
     </html>
   );
