@@ -1,3 +1,5 @@
+"use client";
+
 import ChampionImage from "./championImage";
 import PlayerInventory from "./playerInventory";
 import PlayerStats from "./playerStats";
@@ -13,6 +15,7 @@ interface Props {
   Champion: string;
   ClassName?: string;
   Team: string;
+  Onclick: () => void;
 }
 
 export default function FullPlayerData(props: Props) {
@@ -39,6 +42,7 @@ export default function FullPlayerData(props: Props) {
       className={`flex content-center justify-center flex-wrap ${manageOrientation(
         props.Team
       )} w-full ${props.ClassName}`}
+      onClick={props.Onclick}
     >
       <ChampionImage Champion={props.Champion} Potion={potion} />
       <PlayerStats Player={props.Player} />

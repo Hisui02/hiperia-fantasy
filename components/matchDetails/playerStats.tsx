@@ -1,3 +1,5 @@
+"use client";
+
 import { Participant } from "@/Interfaces";
 
 interface ParticipantName extends Participant {

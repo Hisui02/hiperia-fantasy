@@ -1,4 +1,3 @@
-//TODO: Añadir numero de items, si num>1
 import noItem from "./../../public/no-item.png";
 
 export default function ItemImage(props: {

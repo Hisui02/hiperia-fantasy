@@ -66,6 +66,7 @@ export default function Schedule(props: Props) {
                       {new Date(e?.startTime)
                         .toLocaleString("es-ES", {
                           weekday: "long",
+                          day: "numeric",
                         })
                         .replace(/^\w/, (c) => c.toUpperCase())}{" "}
                     </div>
@@ -87,7 +88,7 @@ export default function Schedule(props: Props) {
               </tr>
 
               <tr
-                className={`text-center bg-primary-foreground ${
+                className={`text-center bg-secondary ${
                   e?.state !== "unstarted" ? "cursor-pointer" : ""
                 }`}
                 onClick={() => {

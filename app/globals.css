@@ -50,6 +50,7 @@
       background-size: cover;
     }
   }
+
   body {
     @apply bg-background text-foreground;
   }

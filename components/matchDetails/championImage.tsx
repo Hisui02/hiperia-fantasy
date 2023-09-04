@@ -1,3 +1,5 @@
+"use client";
+
 export default function ChampionImage(props: {
   Champion: string;
   Potion?: number;

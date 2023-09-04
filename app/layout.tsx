@@ -32,17 +32,6 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const session = await getServerSession(authOptions);
-  // const session = { user: { username: "Hisui02" } };
-  // const summonerData = {
-  //   id: "zYZ-ade5lMowTC0qRD7sB7LcuKhbcIamw5BXA-zVyG2OdKGU",
-  //   accountId: "iI6snpT-WXR0mavmGGleCHDwN-2nezGMQn7erE4poRacuCY",
-  //   puuid:
-  //     "0d9sppXVCU2RYA6yXIiewix--N3DFHoCRdPIyBMNw2nw5H3-zEZpyXZwS_v3NqtjttzPPyfOUDXfpA",
-  //   name: "Hisui02",
-  //   profileIconId: 3219,
-  //   revisionDate: 1690741413000,
-  //   summonerLevel: 344,
-  // };
 
   const summonerData = await getSummonerData(session?.user?.username as string);
 

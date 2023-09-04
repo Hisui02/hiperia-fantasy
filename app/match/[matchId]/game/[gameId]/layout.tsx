@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-export default async function Layout({
+async function Layout({
   children,
   params,
 }: {
@@ -78,3 +78,5 @@ export default async function Layout({
     </>
   );
 }
+
+export default Layout;

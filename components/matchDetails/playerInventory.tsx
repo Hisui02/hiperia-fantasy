@@ -1,3 +1,5 @@
+"use client";
+
 import ItemImage from "./itemImage";
 
 function countDuplicates(arr: any) {
@@ -8,12 +10,12 @@ function countDuplicates(arr: any) {
     if (item === 2055) {
       count2055++;
     } else {
-      result.push({ item: item, count: 1 });
+      result.push({ item: item, count: 1, id: result.length });
     }
   }
 
   if (count2055 > 0) {
-    result.push({ item: 2055, count: count2055 });
+    result.push({ item: 2055, count: count2055, id: result.length });
   }
 
   return result;
@@ -49,7 +51,7 @@ export default function PlayerInventory(props: {
   let itemsWCuantity = countDuplicates(items);
 
   while (itemsWCuantity.length < 6) {
-    itemsWCuantity.push({ item: -1, count: 1 });
+    itemsWCuantity.push({ item: -1, count: 1, id: itemsWCuantity.length });
   }
 
   // console.log(itemsWCuantity);
@@ -66,6 +68,7 @@ export default function PlayerInventory(props: {
         {itemsWCuantity.map((i) => {
           return (
             <ItemImage
+              key={i.id}
               Item={i.item}
               Count={i.count}
               ClassName={`w-${props.ItemSize}`}
