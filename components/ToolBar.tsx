@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { SummonerInterface } from "@/Interfaces/Summoner";
@@ -19,7 +20,7 @@ function classNames(...classes: [string, string]) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default async function ToolBar(props: { summoner: SummonerInterface }) {
+export default function ToolBar(props: { summoner: SummonerInterface }) {
   const PlayerLogo: { src: string; alt: string } = {
     src: `http://ddragon.leagueoflegends.com/cdn/13.9.1/img/profileicon/${props.summoner.profileIconId}.png`,
     alt: `${props.summoner.name}`,
@@ -73,16 +74,20 @@ export default async function ToolBar(props: { summoner: SummonerInterface }) {
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
                   <Link href="/home">
-                    <img
+                    <Image
                       className="block h-8 w-auto lg:hidden"
                       src={HiperiaLogo.src}
                       alt={HiperiaLogo.alt}
+                      width={5}
+                      height={5}
                     />
 
-                    <img
+                    <Image
                       className="hidden h-8 w-auto lg:block"
                       src={HiperiaLogo.src}
                       alt={HiperiaLogo.alt}
+                      width={5}
+                      height={5}
                     />
                   </Link>
                 </div>
@@ -119,6 +124,8 @@ export default async function ToolBar(props: { summoner: SummonerInterface }) {
                           className="h-11 w-11 rounded-full relative top-2"
                           src={PlayerLogo.src}
                           alt={PlayerLogo.alt}
+                          width={5}
+                          height={5}
                         />
                         <span className="relative bottom-1 font-semibold text-xs text-primary bg-background rounded-xl px-2">
                           {props.summoner.summonerLevel}

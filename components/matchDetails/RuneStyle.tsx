@@ -1,6 +1,7 @@
 "use client";
 
 import { StyleRuneInterface } from "@/Interfaces";
+import Image from "next/image";
 
 interface Props {
   Rune: StyleRuneInterface;
@@ -13,10 +14,13 @@ export default function RuneStyle(props: Props) {
         {props.Rune?.name}
       </span>
       <div className="flex justify-center w-1/6">
-        <img
+        <Image
           className="w-10"
           src={`https://ddragon.leagueoflegends.com/cdn/img/${props.Rune?.icon}`}
           alt={`${props.Rune.id}`}
+          width={5}
+          height={5}
+          unoptimized={true}
         />
       </div>
     </div>
