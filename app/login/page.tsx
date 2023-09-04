@@ -24,7 +24,7 @@ export default function Login(props: Props) {
     event.preventDefault();
     setIsLoading(true);
     const result = await signIn("credentials", {
-      username: user.current,
+      name: user.current,
       password: password.current,
       redirect: true,
       callbackUrl: "/home",

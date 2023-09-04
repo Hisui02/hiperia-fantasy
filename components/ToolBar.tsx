@@ -80,6 +80,7 @@ export default function ToolBar(props: { summoner: SummonerInterface }) {
                       alt={HiperiaLogo.alt}
                       width={5}
                       height={5}
+                      unoptimized={true}
                     />
 
                     <Image
@@ -120,12 +121,13 @@ export default function ToolBar(props: { summoner: SummonerInterface }) {
                   <div>
                     <Menu.Button className="flex rounded-full text-sm">
                       <div>
-                        <img
+                        <Image
                           className="h-11 w-11 rounded-full relative top-2"
                           src={PlayerLogo.src}
                           alt={PlayerLogo.alt}
                           width={5}
                           height={5}
+                          unoptimized={true}
                         />
                         <span className="relative bottom-1 font-semibold text-xs text-primary bg-background rounded-xl px-2">
                           {props.summoner.summonerLevel}
