@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import HiperiaLogo from "../../public/hiperia_logo.svg";
 import Background from "../../public/loginBackground.png";
 import { signIn } from "next-auth/react";
@@ -23,7 +24,7 @@ export default function Login(props: Props) {
     event.preventDefault();
     setIsLoading(true);
     const result = await signIn("credentials", {
-      username: user.current,
+      name: user.current,
       password: password.current,
       redirect: true,
       callbackUrl: "/home",
@@ -42,7 +43,7 @@ export default function Login(props: Props) {
       <div className="rounded-xl bg-gray-800 bg-opacity-50 px-16 py-10 shadow-lg backdrop-blur-md max-sm:px-8">
         <div className="text-white">
           <div className="mb-8 flex flex-col items-center">
-            <img src={HiperiaLogo.src} width="150" alt="" />
+            <Image src={HiperiaLogo.src} width={150} alt="" height={150} />
             <h1 className="mt-2 text-2xl">Fantasy</h1>
             {props.searchParams.error && (
               <span className="mt-2 text-md font-bold text-red-700">

@@ -33,7 +33,7 @@ export default async function RootLayout({
 }) {
   const session = await getServerSession(authOptions);
 
-  const summonerData = await getSummonerData(session?.user?.username as string);
+  const summonerData = await getSummonerData(session?.user?.name as string);
 
   return (
     <html lang="en">

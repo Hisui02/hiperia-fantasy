@@ -14,7 +14,7 @@ export const authOptions: NextAuthOptions = {
       // e.g. domain, username, password, 2FA token, etc.
       // You can pass any HTML attribute to the <input> tag through the object.
       credentials: {
-        username: { label: "Username", type: "text", placeholder: "Username" },
+        name: { label: "Username", type: "text", placeholder: "Username" },
         password: {
           label: "Password",
           type: "password",
@@ -26,10 +26,13 @@ export const authOptions: NextAuthOptions = {
         await connectDB();
 
         const userFound = await User.findOne({
-          username: credentials?.username,
+          name: credentials?.name,
         }).select("+password");
+        console.log(credentials);
 
-        if (!userFound) throw new Error("Invalid credentials");
+        console.log(userFound);
+
+        if (!userFound) throw new Error("User not found");
 
         const passwordMatch = credentials?.password === userFound.password;
         if (!passwordMatch) throw new Error("Invalid credentials");

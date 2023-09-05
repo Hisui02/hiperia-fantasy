@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 interface Props {
   Rune: {
     id: number;
@@ -30,12 +32,15 @@ export default function Rune(props: Props) {
         )}
       </div>
       <div className="flex justify-center sm:w-1/6">
-        <img
+        <Image
           className={`${
             props.IsMainRune ? "w-24" : "w-12"
           } m-auto aspect-square`}
           src={`https://ddragon.leagueoflegends.com/cdn/img/${props.Rune?.icon}`}
           alt={props.Rune?.id as unknown as string}
+          width={5}
+          height={5}
+          unoptimized={true}
         />
       </div>
     </div>

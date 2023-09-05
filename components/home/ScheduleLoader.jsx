@@ -1,6 +1,7 @@
 "use client";
 
 import { Skeleton } from "@/components/ui/skeleton";
+import { Fragment } from "react";
 
 export default function ScheduleLoader() {
   const a = [1, 2, 3, 4, 5];
@@ -10,7 +11,7 @@ export default function ScheduleLoader() {
       <tbody>
         {a.map((e) => {
           return (
-            <>
+            <Fragment key={e}>
               <tr className="bg-background">
                 <td colSpan={5}>
                   <div className="flex justify-center p-1">
@@ -54,7 +55,7 @@ export default function ScheduleLoader() {
                   </div>
                 </td>
               </tr>
-            </>
+            </Fragment>
           );
         })}
       </tbody>

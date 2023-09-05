@@ -1,3 +1,4 @@
+import Image from "next/image";
 import noItem from "./../../public/no-item.png";
 
 export default function ItemImage(props: {
@@ -13,10 +14,13 @@ export default function ItemImage(props: {
 
   return (
     <div className={`relative grid`}>
-      <img
+      <Image
         className={props.ClassName}
         src={src}
         alt={props.Item as unknown as string}
+        width={5}
+        height={5}
+        unoptimized={true}
       />
       {props.Count && props.Count > 1 && (
         <span className="absolute text-lg text-white bottom-0 right-0 leading-3">

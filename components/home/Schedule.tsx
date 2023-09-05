@@ -1,9 +1,9 @@
 "use client";
-
 import { ScheduleInterface } from "@/Interfaces";
 import { Fragment, Suspense } from "react";
 import { useRouter } from "next/navigation";
 import { Skeleton } from "../ui/skeleton";
+import Image from "next/image";
 
 type Props = {
   Schedule: ScheduleInterface;
@@ -102,11 +102,14 @@ export default function Schedule(props: Props) {
                     <Suspense
                       fallback={<Skeleton className="h-24 w-24 rounded-full" />}
                     >
-                      <img
+                      <Image
                         src={e?.match?.teams[0].image}
                         alt={e?.match?.teams[0].name}
                         className="w-20"
-                      ></img>
+                        width={5}
+                        height={5}
+                        unoptimized={true}
+                      ></Image>
                     </Suspense>
                   </div>
                 </td>
@@ -119,11 +122,14 @@ export default function Schedule(props: Props) {
                   <Suspense
                     fallback={<Skeleton className="h-24 w-24 rounded-full" />}
                   >
-                    <img
+                    <Image
                       src={e?.match?.teams[1].image}
                       alt={e?.match?.teams[1].name}
                       className="w-20"
-                    ></img>
+                      width={5}
+                      height={5}
+                      unoptimized={true}
+                    ></Image>
                   </Suspense>
                 </td>
 
