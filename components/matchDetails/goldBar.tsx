@@ -23,6 +23,7 @@ const Bar = React.forwardRef<
     />
   </ProgressPrimitive.Root>
 ));
+Bar.displayName = ProgressPrimitive.Root.displayName;
 
 interface Props {
   blueTeamGold: number;
