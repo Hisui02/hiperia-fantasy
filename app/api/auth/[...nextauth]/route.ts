@@ -28,9 +28,6 @@ export const authOptions: NextAuthOptions = {
         const userFound = await User.findOne({
           name: credentials?.name,
         }).select("+password");
-        console.log(credentials);
-
-        console.log(userFound);
 
         if (!userFound) throw new Error("User not found");
 

@@ -1,6 +1,11 @@
-import { MatchData, StyleRuneInterface } from "@/Interfaces";
-import { MatchPlayerDetails } from "@/Interfaces";
+import {
+  MatchData,
+  StyleRuneInterface,
+  ScheduleInterface,
+  MatchPlayerDetails,
+} from "@/Interfaces";
 import MatchDetails from "@/components/matchDetails/matchDetails";
+import { Suspense } from "react";
 
 const hoy = new Date(); //Añadiendo el startingTime nos aseguramos los últimos datos posibles
 hoy.setSeconds(0, 0);
@@ -68,10 +73,12 @@ export default async function Page({ params }: Params) {
   // console.log(perks);
 
   return (
-    <MatchDetails
-      MatchDetails={matchDetails}
-      PlayerDetails={playerDetails}
-      PerksData={perks}
-    />
+    <Suspense>
+      <MatchDetails
+        MatchDetails={matchDetails}
+        PlayerDetails={playerDetails}
+        PerksData={perks}
+      />
+    </Suspense>
   );
 }
